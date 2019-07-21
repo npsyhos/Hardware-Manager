@@ -1,0 +1,7 @@
+C:\Users\Nick\source\repos\ProcessLib\bin\Debug\ProcessLib.exe.config
+C:\Users\Nick\source\repos\ProcessLib\bin\Debug\ProcessLib.exe
+C:\Users\Nick\source\repos\ProcessLib\bin\Debug\ProcessLib.pdb
+C:\Users\Nick\source\repos\ProcessLib\obj\Debug\ProcessLib.csprojAssemblyReference.cache
+C:\Users\Nick\source\repos\ProcessLib\obj\Debug\ProcessLib.csproj.CoreCompileInputs.cache
+C:\Users\Nick\source\repos\ProcessLib\obj\Debug\ProcessLib.exe
+C:\Users\Nick\source\repos\ProcessLib\obj\Debug\ProcessLib.pdb
