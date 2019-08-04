@@ -12,3 +12,10 @@ C:\Users\Nick\source\repos\Hardware-Manager\HWManagerServices\obj\Debug\Hardware
 C:\Users\Nick\source\repos\Hardware-Manager\HWManagerServices\obj\Debug\HardwareServices.csproj.CoreCompileInputs.cache
 C:\Users\Nick\source\repos\Hardware-Manager\HWManagerServices\obj\Debug\ProcessLib.exe
 C:\Users\Nick\source\repos\Hardware-Manager\HWManagerServices\obj\Debug\ProcessLib.pdb
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.csprojAssemblyReference.cache
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.csproj.CoreCompileInputs.cache
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.exe.config
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.exe
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.pdb
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.exe
+C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.pdb
