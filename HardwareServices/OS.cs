@@ -1,19 +1,19 @@
 ﻿namespace HardwareServices
 {
-    class OS : Component
+    class OS : SingleComponent
     {
         public OS()
         {
             Key = "Win32_OperatingSystem";
 
             // Change this to use decorators on the prop names later ?
-            ColumnNames = new[] { "InstallDate", "Manufacturer", "OSArchitecture", "Version", "LastBootUpTime", "Name" };
+            PropertyNames = new[] { "InstallDate", "Manufacturer", "OSArchitecture", "Version", "LastBootUpTime", "Name" };
             Query = ConstructQuery();
             SetPropertyData();
         }
 
         internal override string Key { get; set; }
-        internal override string[] ColumnNames { get; set; }
+        internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
         public string InstallDate { get; set; }

@@ -4,49 +4,30 @@ using System.Management;
 
 namespace HardwareServices
 {
-    class StorageDrives : Component
+    class StorageDrives : MultipleComponents
     {
         public class StorageComponent
         {
-            public string Model { get; set; }
-            public UInt64 Size { get; set; }
-            public string SerialNumber { get; set; }
             public UInt32 Partitions { get; set; }
+            public UInt64 Size { get; set; }
+            public string Model { get; set; }
+            public string SerialNumber { get; set; }
         }
 
         internal override string Key { get; set; }
-        internal override string[] ColumnNames { get; set; }
+        internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public List<StorageComponent> StorageProperties { get; set; }
+        public override List<object> DataProperties { get; set; }
 
-        public StorageDrives()
+        public StorageDrives() : base(new StorageComponent())
         {
             Key = "Win32_DiskDrive";
 
             // Change this to use decorators on the prop names later ?
-            ColumnNames = new[] { "Model", "Size", "SerialNumber", "Partitions" };
+            PropertyNames = new[] { "Model", "Size", "SerialNumber", "Partitions" };
             Query = ConstructQuery();
-            StorageProperties = new List<StorageComponent>();
+            DataProperties = new List<object>();
             SetPropertyData();
-        }
-
-        internal override void SetPropertyData()
-        {
-            // Get the property information on the piece of hardware
-            ManagementObjectCollection managementObj = ExecuteQuery();
-            // Set the list of property data
-            if (managementObj != null)
-            {
-                foreach (ManagementObject managementObject in managementObj)
-                {
-                    StorageProperties.Add(new StorageComponent());
-                    int lastIndex = StorageProperties.Count - 1;
-                    foreach (PropertyData propData in managementObject.Properties)
-                    {
-                        StorageProperties[lastIndex].GetType().GetProperty(propData.Name).SetValue(StorageProperties[lastIndex], propData.Value);
-                    }
-                }
-            }
         }
 
         public override string ToString()
