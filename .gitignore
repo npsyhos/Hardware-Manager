@@ -1,3 +1,4 @@
 # Ignore folders
-HardwareServices/.vs/
-HardwareServices/bin/
+.vs/
+bin/
+obj/
