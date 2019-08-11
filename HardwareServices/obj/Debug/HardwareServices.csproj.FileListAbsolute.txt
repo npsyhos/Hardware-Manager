@@ -19,3 +19,10 @@ C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\bin\Debug\HardwareS
 C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.pdb
 C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.exe
 C:\Users\Nick\source\repos\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.pdb
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.exe.config
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.exe
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\bin\Debug\HardwareServices.pdb
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.csprojAssemblyReference.cache
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.csproj.CoreCompileInputs.cache
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.exe
+C:\Users\nickp\source\repos\Hardware-Manager\Hardware-Manager\HardwareServices\obj\Debug\HardwareServices.pdb

@@ -1,19 +1,19 @@
 ﻿namespace HardwareServices
 {
-    class Motherboard : Component
+    class Motherboard : SingleComponent
     {
         public Motherboard()
         {
             Key = "Win32_BaseBoard";
 
             // Change this to use decorators on the prop names later ?
-            ColumnNames = new[] { "Manufacturer", "Product" };
+            PropertyNames = new[] { "Manufacturer", "Product" };
             Query = ConstructQuery();
             SetPropertyData();
         }
 
         internal override string Key { get; set; }
-        internal override string[] ColumnNames { get; set; }
+        internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
         public string Manufacturer { get; set; }
