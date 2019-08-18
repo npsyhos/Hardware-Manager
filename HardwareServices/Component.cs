@@ -4,13 +4,13 @@ using System.Management;
 
 namespace HardwareServices
 {
-    abstract class Component
+    abstract public class Component
     {
-        internal abstract string Key { get; set; }
+        internal virtual string Key { get; set; }
 
-        internal abstract string[] PropertyNames { get; set; }
+        internal virtual string[] PropertyNames { get; set; }
 
-        internal abstract string Query { get; set; }
+        internal virtual string Query { get; set; }
 
         public abstract override string ToString();
 
@@ -60,7 +60,7 @@ namespace HardwareServices
     /// Abstract class to be used with components that have
     /// only one obtainable component. e.g.: BIOS, OS, Processor
     /// </summary>
-    abstract class SingleComponent : Component
+    abstract public class SingleComponent : Component
     {
         /// <summary>
         /// Get the property data for the Key from System.Management
@@ -78,7 +78,21 @@ namespace HardwareServices
                 {
                     foreach (PropertyData propData in managementObject.Properties)
                     {
-                        GetType().GetProperty(propData.Name).SetValue(this, propData.Value);
+                        if (propData.Name == "L2CacheSize" || propData.Name == "L3CacheSize")
+                        {
+                            // Converts the size to a human readable format
+                            GetType().GetProperty(propData.Name).SetValue(this, HardwareUtilities.ConvertSize(propData.Value));
+                        }
+                        else if (HardwareUtilities.ConvertToDatetime(propData.Name) == true)
+                        {
+                            // Converts the time to a human readable format
+                            DateTime datetime = ManagementDateTimeConverter.ToDateTime((string)propData.Value);
+                            GetType().GetProperty(propData.Name).SetValue(this, datetime);
+                        }
+                        else
+                        {
+                            GetType().GetProperty(propData.Name).SetValue(this, propData.Value);
+                        }
                     }
                 }
             }
@@ -89,7 +103,7 @@ namespace HardwareServices
     /// Abstract class to be used with components that have
     /// multiple obtainable components. e.g.: Monitors, NetworkCards
     /// </summary>
-    abstract class MultipleComponents : Component
+    abstract public class MultipleComponents : Component
     {
         internal MultipleComponents(object data)
         {
@@ -104,7 +118,7 @@ namespace HardwareServices
         /// <summary>
         /// Stores a list of type Datatype objects containing the properties of a component.
         /// </summary>
-        public abstract List<object> DataProperties { get; set; }
+        public abstract List<object> Components { get; set; }
 
         /// <summary>
         /// Get the property data for the Key from System.Management
@@ -119,11 +133,34 @@ namespace HardwareServices
             {
                 foreach (ManagementObject managementObject in managementObj)
                 {
-                    DataProperties.Add(Activator.CreateInstance(DataType));
-                    int lastIndex = DataProperties.Count - 1;
+                    Components.Add(Activator.CreateInstance(DataType));
+                    int lastIndex = Components.Count - 1;
                     foreach (PropertyData propData in managementObject.Properties)
                     {
-                        DataProperties[lastIndex].GetType().GetProperty(propData.Name).SetValue(DataProperties[lastIndex], propData.Value);
+                        if (propData.Name == "Capacity" || propData.Name == "Size")
+                        {
+                            // Converts the size to a human readable format
+                            string size = HardwareUtilities.ConvertSize(propData.Value);
+                            Components[lastIndex].GetType().GetProperty(propData.Name).SetValue(Components[lastIndex], size);
+                        }
+                        else if (HardwareUtilities.ConvertToDatetime(propData.Name) == true)
+                        {
+                            // Converts the time to a human readable format
+                            DateTime datetime = ManagementDateTimeConverter.ToDateTime((string)propData.Value);
+                            Components[lastIndex].GetType().GetProperty(propData.Name).SetValue(Components[lastIndex], datetime);
+                        }
+                        else if (propData.Name.Contains("Refresh"))
+                        {
+                            Components[lastIndex].GetType().GetProperty(propData.Name).SetValue(Components[lastIndex], $"{propData.Value} Hz");
+                        }
+                        else if (propData.Name.Contains("Resolution"))
+                        {
+                            Components[lastIndex].GetType().GetProperty(propData.Name).SetValue(Components[lastIndex], $"{propData.Value} pixels");
+                        }
+                        else
+                        {
+                            Components[lastIndex].GetType().GetProperty(propData.Name).SetValue(Components[lastIndex], propData.Value);
+                        }
                     }
                 }
             }

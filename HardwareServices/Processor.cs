@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class Processor : SingleComponent
+    public class Processor : SingleComponent
     {
         public Processor()
         {
@@ -18,10 +19,14 @@ namespace HardwareServices
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
-        public UInt32 L2CacheSize { get; set; }
-        public UInt32 L3CacheSize { get; set; }
-        public string Name { get; set; }
-        public string SystemName { get; set; }
+        [DisplayName("Name")]
+        public string Name { get; private set; }
+        [DisplayName("L2 Cache Size")]
+        public string L2CacheSize { get; private set; }
+        [DisplayName("L3 Cache Size")]
+        public string L3CacheSize { get; private set; }
+        [DisplayName("System Name")]
+        public string SystemName { get; private set; }
 
         public override string ToString()
         {

@@ -1,19 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class Display : MultipleComponents
+    public class Display : MultipleComponents
     {
-        public class DisplayComponent
+        public class DisplayComponent : SingleComponent
         {
-            public string Caption { get; set; }
-            public string MonitorType { get; set; }
+            [DisplayName("Caption")]
+            public string Caption { get; private set; }
+            [DisplayName("Monitor Type")]
+            public string MonitorType { get; private set; }
+
+            public override string ToString()
+            {
+                return Caption;
+            }
         }
 
         internal override string Key { get; set; }
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public override List<object> DataProperties { get; set; }
+        public override List<object> Components { get; set; }
 
         public Display() : base(new DisplayComponent())
         {
@@ -22,7 +30,7 @@ namespace HardwareServices
             // Change this to use decorators on the prop names later ?
             PropertyNames = new[] { "Caption", "MonitorType" };
             Query = ConstructQuery();
-            DataProperties = new List<object>();
+            Components = new List<object>();
             SetPropertyData();
         }
 

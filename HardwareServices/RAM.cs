@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Management;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class RAM : MultipleComponents
+    public class RAM : MultipleComponents
     {
-        public class RAMComponent
+        public class RAMComponent : SingleComponent
         {
-            public UInt32 Speed { get; set; }
-            public UInt32 ConfiguredClockSpeed { get; set; }
-            public UInt64 Capacity { get; set; }
-            public string PartNumber { get; set; }
-            public string DeviceLocator { get; set; }
+            [DisplayName("Speed")]
+            public UInt32 Speed { get; private set; }
+            [DisplayName("Configured Clock Speed")]
+            public UInt32 ConfiguredClockSpeed { get; private set; }
+            [DisplayName("Size")]
+            public string Capacity { get; private set; }
+            [DisplayName("Part Number")]
+            public string PartNumber { get; private set; }
+            [DisplayName("Location")]
+            public string DeviceLocator { get; private set; }
+
+            public override string ToString()
+            {
+                return DeviceLocator;
+            }
         }
 
         internal override string Key { get; set; }
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public override List<object> DataProperties { get; set; }
+        public override List<object> Components { get; set; }
 
         public RAM() : base(new RAMComponent())
         {
@@ -27,7 +37,7 @@ namespace HardwareServices
             // Change this to use decorators on the prop names later ?
             PropertyNames = new[] { "PartNumber", "Capacity", "Speed", "ConfiguredClockSpeed", "DeviceLocator" };
             Query = ConstructQuery();
-            DataProperties = new List<object>();
+            Components = new List<object>();
             SetPropertyData();
         }
 

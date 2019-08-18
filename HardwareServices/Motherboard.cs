@@ -1,6 +1,8 @@
-﻿namespace HardwareServices
+﻿using System.ComponentModel;
+
+namespace HardwareServices
 {
-    class Motherboard : SingleComponent
+    public class Motherboard : SingleComponent
     {
         public Motherboard()
         {
@@ -16,8 +18,10 @@
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
-        public string Manufacturer { get; set; }
-        public string Product { get; set; }
+        [DisplayName("Manufacturer")]
+        public string Manufacturer { get; private set; }
+        [DisplayName("Model")]
+        public string Product { get; private set; }
 
         public override string ToString()
         {

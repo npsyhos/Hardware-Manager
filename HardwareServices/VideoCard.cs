@@ -1,25 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class VideoCard : MultipleComponents
+    public class VideoCard : MultipleComponents
     {
-        public class VideoCardComponent
+        public class VideoCardComponent : SingleComponent
         {
-            public UInt32 MaxRefreshRate { get; set; }
-            public UInt32 MinRefreshRate { get; set; }
-            public UInt32 CurrentHorizontalResolution { get; set; }
-            public UInt32 CurrentVerticalResolution { get; set; }
-            public string Name { get; set; }
-            public string DriverDate { get; set; }
-            public string DriverVersion { get; set; }
+            [DisplayName("Name")]
+            public string Name { get; private set; }
+            [DisplayName("Driver Version")]
+            public string DriverVersion { get; private set; }
+            [DisplayName("Driver Date")]
+            public DateTime DriverDate { get; private set; }
+            [DisplayName("Horizontal Resolution")]
+            public string CurrentHorizontalResolution { get; private set; }
+            [DisplayName("Vertical Resolution")]
+            public string CurrentVerticalResolution { get; private set; }
+            [DisplayName("Maximum Refresh Rate")]
+            public string MaxRefreshRate { get; private set; }
+            [DisplayName("Minimum Refresh Rate")]
+            public string MinRefreshRate { get; private set; }
+
+            public override string ToString()
+            {
+                return Name;
+            }
         }
 
         internal override string Key { get; set; }
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public override List<object> DataProperties { get; set; }
+        public override List<object> Components { get; set; }
 
         public VideoCard() : base(new VideoCardComponent())
         {
@@ -28,7 +41,7 @@ namespace HardwareServices
             // Change this to use decorators on the prop names later ?
             PropertyNames = new[] { "Name", "DriverDate", "DriverVersion", "MaxRefreshRate", "MinRefreshRate", "CurrentHorizontalResolution", "CurrentVerticalResolution" };
             Query = ConstructQuery();
-            DataProperties = new List<object>();
+            Components = new List<object>();
             SetPropertyData();
         }
 

@@ -1,22 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class NetworkCard : MultipleComponents
+    public class NetworkCard : MultipleComponents
     {
-        public class ComponentData
+        public class ComponentData : SingleComponent
         {
-            public string Manufacturer { get; set; }
-            public string Name { get; set; }
-            public string AdapterType { get; set; }
-            public string MACAddress { get; set; }
-            public string NetConnectionID { get; set; }
+            [DisplayName("Manufacturer")]
+            public string Manufacturer { get; private set; }
+            [DisplayName("Name")]
+            public string Name { get; private set; }
+            [DisplayName("Adapter Type")]
+            public string AdapterType { get; private set; }
+            [DisplayName("MAC Address")]
+            public string MACAddress { get; private set; }
+            [DisplayName("Network Connection ID")]
+            public string NetConnectionID { get; private set; }
+
+            public override string ToString()
+            {
+                return Name;
+            }
         }
 
         internal override string Key { get; set; }
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public override List<object> DataProperties { get; set; }
+        public override List<object> Components { get; set; }
 
         public NetworkCard() : base(new ComponentData())
         {
@@ -25,7 +36,7 @@ namespace HardwareServices
             // Change this to use decorators on the prop names later ?
             PropertyNames = new[] { "Manufacturer", "Name", "AdapterType", "MACAddress", "NetConnectionID" };
             Query = ConstructQuery();
-            DataProperties = new List<object>();
+            Components = new List<object>();
             SetPropertyData();
         }
 

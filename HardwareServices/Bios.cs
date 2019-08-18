@@ -1,6 +1,9 @@
-﻿namespace HardwareServices
+﻿using System;
+using System.ComponentModel;
+
+namespace HardwareServices
 {
-    class Bios : SingleComponent
+    public class Bios : SingleComponent
     {
         public Bios()
         {
@@ -16,9 +19,12 @@
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
-        public string Manufacturer { get; set; }
-        public string Version { get; set; }
-        public string ReleaseDate { get; set; }
+        [DisplayName("Manufacturer")]
+        public string Manufacturer { get; private set; }
+        [DisplayName("Version")]
+        public string Version { get; private set; }
+        [DisplayName("Release Date")]
+        public DateTime ReleaseDate { get; private set; }
 
         public override string ToString()
         {

@@ -1,6 +1,9 @@
-﻿namespace HardwareServices
+﻿using System;
+using System.ComponentModel;
+
+namespace HardwareServices
 {
-    class OS : SingleComponent
+    public class OS : SingleComponent
     {
         public OS()
         {
@@ -16,12 +19,21 @@
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
 
-        public string InstallDate { get; set; }
-        public string Manufacturer { get; set; }
-        public string OSArchitecture { get; set; }
-        public string Version { get; set; }
-        public string LastBootUpTime { get; set; }
-        public string Name { get; set; }
+        [DisplayName("OS Name")]
+        public string Name { get; private set; }
+       
+        [DisplayName("Manufacturer")]
+        public string Manufacturer { get; private set; }
+        [DisplayName("OS Architecture")]
+        public string OSArchitecture { get; private set; }
+        [DisplayName("Version")]
+        public string Version { get; private set; }
+        [DisplayName("Install Date")]
+        public DateTime InstallDate { get; private set; }
+        [DisplayName("Last Booted")]
+        public DateTime LastBootUpTime { get; private set; }
+
+        
 
         public override string ToString()
         {

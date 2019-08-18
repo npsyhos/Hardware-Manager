@@ -1,19 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HardwareServices
 {
-    class USB : MultipleComponents
+    public class USB : MultipleComponents
     {
-        public class USBComponent
+        public class USBComponent : SingleComponent
         {
-            public string Name { get; set; }
-            public string Description { get; set; }
+            [DisplayName("Description")]
+            public string Description { get; private set; }
+            [DisplayName("Name")]
+            public string Name { get; private set; }
+
+            public override string ToString()
+            {
+                return Name;
+            }
         }
 
         internal override string Key { get; set; }
         internal override string[] PropertyNames { get; set; }
         internal override string Query { get; set; }
-        public override List<object> DataProperties { get; set; }
+        public override List<object> Components { get; set; }
 
         public USB() : base(new USBComponent())
         {
@@ -22,7 +30,7 @@ namespace HardwareServices
             // Change this to use decorators on the prop names later ?
             PropertyNames = new[] { "Name", "Description" };
             Query = ConstructQuery();
-            DataProperties = new List<object>();
+            Components = new List<object>();
             SetPropertyData();
         }
 
